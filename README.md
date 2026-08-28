@@ -26,3 +26,6 @@ Data plane:
 - Clusters — Spark-ноды
 - Data sources — DB, lake, files, blobs
 - Secure integrations — BI, keys, identity (RBAC)
+
+### Reference architecture
+<img width="1698" height="957" alt="image" src="https://github.com/user-attachments/assets/823a7ae8-5794-4aea-a11c-60ca622b778e" />
