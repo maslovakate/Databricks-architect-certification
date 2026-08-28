@@ -93,3 +93,6 @@ Compute на всех стрелках внутри озера — Azure Databri
 ### Cost Management
 1. https://www.databricks.com/product/azure-pricing
 2. https://azure.microsoft.com/en-us/pricing/calculator/
+
+<img width="1696" height="554" alt="image" src="https://github.com/user-attachments/assets/195f978f-d8f3-49c6-9b04-a73f10466bee" />
+
