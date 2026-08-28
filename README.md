@@ -96,3 +96,6 @@ Compute на всех стрелках внутри озера — Azure Databri
 
 <img width="1696" height="554" alt="image" src="https://github.com/user-attachments/assets/195f978f-d8f3-49c6-9b04-a73f10466bee" />
 
+### Planning Azure Workspace
+<img width="1679" height="790" alt="image" src="https://github.com/user-attachments/assets/6f27d08a-1ec5-4ec5-a8e5-9ee3aadf34c3" />
+
