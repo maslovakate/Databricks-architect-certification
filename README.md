@@ -89,3 +89,7 @@ Flow:
 4. **Gold** — агрегаты и витрины «готово к отчёту».
 5. **Serve** — копия/выдача наружу: Cosmos (низкая latency), Synapse + Power BI, Apps.
 Compute на всех стрелках внутри озера — Azure Databricks. Storage слоёв — ADLS.
+
+### Cost Management
+1. https://www.databricks.com/product/azure-pricing
+2. https://azure.microsoft.com/en-us/pricing/calculator/
