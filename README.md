@@ -15,8 +15,8 @@ Tenant (Entra ID)
 - Web app — UI workspace
 - Notebooks — исходный код
 - Jobs — scheduler
-- Cluster manager — create/stop clusters
 - Metastore — metadata таблиц (имена, schema), не файлы
+- Cluster manager — create/stop clusters
   
 Data plane:
 - Clusters — Spark-ноды
