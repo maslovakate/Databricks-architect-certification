@@ -12,7 +12,7 @@
 - [Network Security](#network-security): [VNet Injection](#vnet-injection) · [Secure Cluster Connectivity (SCC)](#secure-cluster-connectivity-scc) · [Azure Private Link](#azure-private-link)
 - [Identity and Access](#identity-and-access): [SCIM](#system-for-cross-domain-identity-management-scim) · [External User Types in Azure Active Directory](#external-user-types-in-azure-active-directory)
 - [Data Governance](#data-governance): [Unity Catalog](#unity-catalog)
-- [Network Administration](#network-administration): [SDN](#software-defined-network-sdn) · [RFC 1918 Private Address Space](#rfc-1918-private-address-space) · [Subnets](#subnets) · [CIDR Ranges](#cidr-ranges) · [VNet Peering](#vnet-peering) · [User-Defined Routes (UDR)](#user-defined-routes-udr)
+- [Network Administration](#network-administration): [SDN](#software-defined-network-sdn) · [Additional Networking Topics and Concepts](#additional-networking-topics-and-concepts) · [Subnets](#subnets) · [CIDR Ranges](#cidr-ranges) · [VNet Peering](#vnet-peering) · [User-Defined Routes (UDR)](#user-defined-routes-udr)
 - [Data Loss Prevention](#data-loss-prevention): [Data Exfiltration](#data-exfiltration) · [Azure Features for DLP](#azure-features-for-dlp) · [Azure Databricks Features for DLP](#azure-databricks-features-for-dlp) · [Additional DLP Topics](#additional-dlp-topics)
 - [Endpoints](#endpoints): [Private Endpoints](#private-endpoints) · [Service Endpoints](#service-endpoints)
 
@@ -22,8 +22,8 @@
 
 <img width="1328" height="749" alt="image" src="https://github.com/user-attachments/assets/e4110356-7d71-4924-a646-7f588f1e791c" />
 
-**Определение.** Пятиуровневая иерархия управления ресурсами Azure:
-Account → Tenant → Subscription → Resource Group → Resources.
+**Определение.** Azure Hierarchical Structure — пятиуровневая иерархия ресурсов
+Azure: Account → Tenant → Subscription → Resource Group → Resources.
 
 **Назначение.** Определяет, кто платит, где живут identity и на каком уровне
 применяются права и квоты. Workspace Azure Databricks создаётся внутри
@@ -37,7 +37,7 @@ Account → Tenant → Subscription → Resource Group → Resources.
 | `Tenant` | Azure Active Directory (ныне Microsoft Entra ID): users, groups, SSO |
 | `Subscription` | счёт, Azure RBAC (Role-Based Access Control), квоты |
 | `Resource Group` | контейнер жизненного цикла: деплой и удаление пачкой |
-| `Resources` | VNet, ADLS, Key Vault, Databricks workspace |
+| `Resources` | VNet (Virtual Network), ADLS (Azure Data Lake Storage), Key Vault, Databricks workspace |
 
 **Ограничения.** Квоты subscription на vCPU и публичные IP-адреса ограничивают
 предельный размер кластеров.
@@ -50,8 +50,8 @@ Account → Tenant → Subscription → Resource Group → Resources.
 
 <img width="1054" height="595" alt="image" src="https://github.com/user-attachments/assets/f9fd603c-7270-4174-a1c6-7b2ede65201e" />
 
-**Определение.** Разделение платформы на control plane в подписке Azure
-Databricks и data plane в подписке заказчика.
+**Определение.** Control Plane and Data Plane — разделение платформы на
+control plane в подписке Azure Databricks и data plane в подписке заказчика.
 
 **Назначение.** Управление отделено от обработки: Databricks отвечает за
 управляющие сервисы, данные и вычисления остаются в облаке заказчика.
@@ -77,8 +77,8 @@ Databricks и data plane в подписке заказчика.
 
 <img width="1698" height="957" alt="image" src="https://github.com/user-attachments/assets/823a7ae8-5794-4aea-a11c-60ca622b778e" />
 
-**Определение.** Референсная схема платформы данных на Azure: пять стадий от
-источников до потребителей.
+**Определение.** Lakehouse Reference Architecture — референсная схема платформы
+данных на Azure: пять стадий от источников до потребителей.
 
 **Назначение.** Задаёт, какой сервис Azure отвечает за каждую стадию, чтобы
 compute, storage и подача данных не смешивались в одном компоненте.
@@ -109,8 +109,8 @@ flowchart LR
 
 <img width="1698" height="910" alt="image" src="https://github.com/user-attachments/assets/09c0fa8b-0c58-414a-b325-15309a39adbe" />
 
-**Определение.** Многослойная модель данных, в которой качество данных растёт
-при переходе Raw → Bronze → Silver → Gold.
+**Определение.** Medallion Architecture — многослойная модель данных, в которой
+качество данных растёт при переходе Raw → Bronze → Silver → Gold.
 
 **Назначение.** Каждый слой имеет свой контракт данных, поэтому ошибка
 обработки исправляется переигрыванием слоя, а не повторным сбором источников.
@@ -139,9 +139,9 @@ flowchart LR
 
 <img width="1696" height="554" alt="image" src="https://github.com/user-attachments/assets/195f978f-d8f3-49c6-9b04-a73f10466bee" />
 
-**Определение.** Четыре механизма снижения стоимости Azure Databricks:
-`Cluster Auto-shutdown`, `Elastic cluster sizes`, `Pre-purchase plan`,
-`Standard vs. Premium tier`.
+**Определение.** Cost Saving Features — четыре механизма снижения стоимости
+Azure Databricks: `Cluster Auto-shutdown`, `Elastic cluster sizes`,
+`Pre-purchase plan`, `Standard vs. Premium tier`.
 
 **Назначение.** Счёт складывается из DBU (Databricks Unit) и инфраструктуры
 Azure. Механизмы уменьшают либо время работы compute, либо ставку за DBU.
@@ -168,7 +168,8 @@ Azure. Механизмы уменьшают либо время работы co
 
 <img width="1679" height="790" alt="image" src="https://github.com/user-attachments/assets/6f27d08a-1ec5-4ec5-a8e5-9ee3aadf34c3" />
 
-**Определение.** Набор вопросов, на которые отвечают до создания workspace.
+**Определение.** Workspace Planning Questions — набор вопросов, на которые
+отвечают до создания workspace.
 
 **Назначение.** Сетевой режим, публичные IP и подключение к on-premises
 задаются при развёртывании, поэтому ошибка на этом шаге исправляется
@@ -190,7 +191,8 @@ Azure. Механизмы уменьшают либо время работы co
 
 <img width="1686" height="652" alt="image" src="https://github.com/user-attachments/assets/9276c8c2-f757-44c0-ae5c-60bb75ad5571" />
 
-**Определение.** Ресурсы и параметры, подготовленные до развёртывания workspace.
+**Определение.** Requirements to Get Started — ресурсы и параметры, которые
+готовят до развёртывания workspace.
 
 **Назначение.** Развёртывание запрашивает их сразу: отсутствие VNet или storage
 account останавливает создание workspace.
@@ -212,8 +214,8 @@ account останавливает создание workspace.
 
 <img width="1694" height="850" alt="image" src="https://github.com/user-attachments/assets/46d5ebea-f47e-4d44-b4e2-3f36a027a9d3" />
 
-**Определение.** VNet (Virtual Network) injection — развёртывание classic
-compute plane в VNet подписки заказчика вместо управляемой сети Databricks.
+**Определение.** VNet Injection — развёртывание classic compute plane в VNet
+подписки заказчика вместо управляемой сети Databricks.
 
 **Назначение.** Даёт организации контроль над маршрутизацией, NSG (Network
 Security Group), Private Endpoint и связью с on-premises. Без injection
@@ -238,7 +240,7 @@ Security Group), Private Endpoint и связью с on-premises. Без injecti
 
 <img width="1701" height="834" alt="image" src="https://github.com/user-attachments/assets/f8e6a945-0f29-4675-9988-87a48faf0508" />
 
-**Определение.** SCC (Secure Cluster Connectivity), также NPIP (No Public IP) —
+**Определение.** Secure Cluster Connectivity (SCC), также No Public IP (NPIP), —
 режим, в котором узлы classic compute не имеют публичных IP-адресов и не
 принимают входящие соединения.
 
@@ -262,8 +264,8 @@ Security Group), Private Endpoint и связью с on-premises. Без injecti
 <img width="1690" height="898" alt="image" src="https://github.com/user-attachments/assets/de0fc6fa-a5d8-480a-8fa5-858862855075" />
 <img width="1689" height="844" alt="image" src="https://github.com/user-attachments/assets/548abe37-af22-4db4-9434-de11c0bc33f8" />
 
-**Определение.** Приватное подключение к Azure Databricks через private
-endpoint с адресом из VNet заказчика.
+**Определение.** Azure Private Link — приватное подключение к Azure Databricks
+через private endpoint с адресом из VNet заказчика.
 
 **Назначение.** Убирает публичные URL из пути доступа: трафик идёт по
 корпоративной сети и Azure backplane, не выходя в интернет.
@@ -287,7 +289,7 @@ endpoint с адресом из VNet заказчика.
 
 <img width="1615" height="866" alt="image" src="https://github.com/user-attachments/assets/81026b6c-f69d-475d-812d-82a9b29dbf60" />
 
-**Определение.** SCIM (System for Cross-Domain Identity Management) —
+**Определение.** System for Cross-Domain Identity Management (SCIM) —
 стандартный протокол синхронизации users, groups и service principal из Azure
 Active Directory в Azure Databricks.
 
@@ -311,8 +313,8 @@ workspace без синхронизации, сохраняет доступ.
 
 <img width="1692" height="826" alt="image" src="https://github.com/user-attachments/assets/2e9fe40b-a145-4812-92e4-0decca54a580" />
 
-**Определение.** Два типа внешних пользователей Azure Active Directory:
-B2B (Business-to-Business) и B2C (Business-to-Customer).
+**Определение.** External User Types in Azure Active Directory — два типа
+внешних пользователей: B2B (Business-to-Business) и B2C (Business-to-Customer).
 
 **Назначение.** Определяет, кому вообще можно выдать доступ к workspace:
 подрядчику или партнёру — можно, потребительской identity — нет.
@@ -333,8 +335,8 @@ B2B (Business-to-Business) и B2C (Business-to-Customer).
 
 <img width="1688" height="737" alt="image" src="https://github.com/user-attachments/assets/5cc16b29-e9b3-4d7b-bb52-73a0a4afba5f" />
 
-**Определение.** Централизованный уровень governance для данных и AI-объектов:
-единый каталог, права доступа и аудит для всех workspace в account.
+**Определение.** Unity Catalog — централизованный уровень governance для данных
+и AI-объектов: единый каталог, права доступа и аудит для всех workspace в account.
 
 **Назначение.** Права определяются один раз на уровне account и действуют во
 всех workspace, вместо повторной настройки доступа в каждом workspace.
@@ -357,45 +359,52 @@ metastore своего региона.
 
 <img width="1663" height="592" alt="image" src="https://github.com/user-attachments/assets/1d590113-1f27-45df-8f78-774bfa99c52e" />
 
-**Определение.** SDN (Software Defined Network) — сетевая модель, в которой
+**Определение.** Software Defined Network (SDN) — сетевая модель, в которой
 топология и политики задаются программно, а не настройкой оборудования.
 
 **Назначение.** Сеть Azure создаётся и меняется как ресурс через API и
 шаблоны, поэтому сетевой периметр workspace воспроизводим и версионируем.
 
-**Как работает.** Три основных компонента: `Network Controller`,
-`Software Load Balancer`, `Gateway`.
+**Как работает.** Три основных компонента:
 
-**Схема.** Сводный слайд перечисляет базовые понятия сети Azure; каждое
-разобрано отдельной темой ниже: [RFC 1918](#rfc-1918-private-address-space),
-[CIDR](#cidr-ranges), [Peering](#vnet-peering), [Routes](#user-defined-routes-udr),
-[Service Endpoints](#service-endpoints), [Private Endpoints](#private-endpoints).
+- `Network Controller` — централизованное управление конфигурацией сети.
+- `Software Load Balancer` — распределение трафика без физического устройства.
+- `Gateway` — выход в другие сети: on-premises, другие VNet, интернет.
+
+**Документация.**
+[What is Azure Virtual Network?](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-overview)
+
+### Additional Networking Topics and Concepts
 
 <img width="1682" height="891" alt="image" src="https://github.com/user-attachments/assets/a6255e6c-de3c-45a2-ac74-2a52177e5163" />
 
+**Определение.** Additional Networking Topics and Concepts — шесть базовых
+понятий сети Azure, на которых строится сетевая конфигурация workspace.
+
+**Назначение.** Задаёт минимальный словарь сети: адресное пространство, размер
+сети, связность, маршрутизация и два способа приватного доступа к сервисам.
+
+**Как работает.**
+
+| Термин | Определение | Подробно |
+| --- | --- | --- |
+| `RFC 1918` | непубличное, не маршрутизируемое в интернете адресное пространство: блоки `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16` | — |
+| `CIDR` | адрес плюс число значащих бит, образующих маршрутную часть; альтернатива традиционным subnet mask | [CIDR Ranges](#cidr-ranges) |
+| `Peering` | соединение двух и более VNet, после которого для связности они выглядят как одна сеть | [VNet Peering](#vnet-peering) |
+| `Routes` | custom или user-defined (static) маршруты, переопределяющие системные маршруты Azure или дополняющие route table подсети | [User-Defined Routes (UDR)](#user-defined-routes-udr) |
+| `Service Endpoints` | безопасное прямое подключение к сервисам Azure по оптимизированному маршруту через Azure backbone | [Service Endpoints](#service-endpoints) |
+| `Private Endpoints` | сетевой интерфейс с частным адресом из VNet, подключающий сервис через Azure Private Link | [Private Endpoints](#private-endpoints) |
+
+**Ограничения.** Адресные пространства связываемых сетей не должны
+перекрываться, иначе адрес не разрешается однозначно.
+
 **Документация.**
-[What is Azure Virtual Network?](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-overview)
-
-### RFC 1918 Private Address Space
-
-**Определение.** RFC 1918 — стандарт, определяющий непубличные, не
-маршрутизируемые в интернете диапазоны IP-адресов.
-
-**Назначение.** Из этих диапазонов берутся адреса VNet, узлов кластера и
-private endpoint, поэтому адресный план не конфликтует с публичной
-маршрутизацией.
-
-**Как работает.** Три блока: `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`.
-
-**Ограничения.** Диапазоны связываемых по peering сетей не должны перекрываться,
-иначе адрес не разрешается однозначно.
-
-**Документация.**
-[What is Azure Virtual Network?](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-overview)
+[What is Azure Virtual Network?](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-networks-overview) ·
+[Networking in Azure Databricks](https://learn.microsoft.com/en-us/azure/databricks/security/network/)
 
 ### Subnets
 
-**Определение.** Subnet — диапазон адресов внутри VNet, из которого узлы
+**Определение.** Subnets — диапазоны адресов внутри VNet, из которых узлы
 получают частные IP.
 
 **Назначение.** Даёт каждому узлу уникальную идентичность в периметре: control
@@ -417,9 +426,9 @@ plane адресует ему job, а узел открывает соедине
 
 ### CIDR Ranges
 
-**Определение.** CIDR (Classless Inter-Domain Routing) — нотация адресного
-пространства вида `10.10.0.0/24`: адрес плюс число значащих бит, образующих
-сетевую часть. Разработана как альтернатива традиционным subnet mask.
+**Определение.** CIDR Ranges (Classless Inter-Domain Routing) — диапазоны
+адресного пространства в нотации `10.10.0.0/24`: адрес плюс число значащих бит,
+образующих маршрутную часть. Альтернатива традиционным subnet mask.
 
 **Назначение.** Задаёт вместимость VNet и subnet, то есть предельное число
 одновременно работающих узлов.
@@ -443,8 +452,8 @@ plane адресует ему job, а узел открывает соедине
 
 <img width="1679" height="832" alt="image" src="https://github.com/user-attachments/assets/9c44a901-af44-493a-b8ba-26454381f9ab" />
 
-**Определение.** Соединение двух и более VNet в Azure, после которого для целей
-связности они выглядят как одна сеть.
+**Определение.** VNet Peering — соединение двух и более VNet в Azure, после
+которого для целей связности они выглядят как одна сеть.
 
 **Назначение.** Даёт частный маршрут между контурами: кластер обращается к ADLS
 или к другой VNet по частным IP, минуя публичный интернет.
@@ -467,7 +476,7 @@ plane адресует ему job, а узел открывает соедине
 
 ### User-Defined Routes (UDR)
 
-**Определение.** UDR (User-Defined Routes) — пользовательская таблица маршрутов
+**Определение.** User-Defined Routes (UDR) — пользовательская таблица маршрутов
 на subnet, переопределяющая системные маршруты Azure: трафик к заданному
 префиксу направляется на указанный next hop.
 
@@ -494,7 +503,7 @@ UDR — каким путём оно идёт.
 
 ### Data Exfiltration
 
-**Определение.** Data exfiltration — несанкционированный вынос данных за
+**Определение.** Data Exfiltration — несанкционированный вынос данных за
 пределы среды Azure Databricks.
 
 **Назначение.** Тема определяет набор обязательных контролей для регулируемых
@@ -519,8 +528,8 @@ Private Link к storage) закрывают путь наружу; Unity Catalog
 
 <img width="1685" height="537" alt="image" src="https://github.com/user-attachments/assets/8c6ac81f-8e44-44c2-afd0-c2f0aa7aba32" />
 
-**Определение.** Средства Azure, применяемые для DLP (Data Loss Prevention) в
-развёртывании Azure Databricks.
+**Определение.** Azure Features for DLP (Data Loss Prevention) — средства Azure,
+применяемые для защиты от утечки данных в развёртывании Azure Databricks.
 
 **Назначение.** Ограничивают сетевые пути, по которым данные могут покинуть
 периметр, и дают наблюдаемость исходящего трафика.
@@ -541,8 +550,8 @@ Private Link к storage) закрывают путь наружу; Unity Catalog
 
 <img width="1679" height="882" alt="image" src="https://github.com/user-attachments/assets/ae793d07-3ae7-4937-acbf-93734c6ef541" />
 
-**Определение.** Средства DLP на стороне платформы: `IP Access Lists` и
-`Unity Catalog`.
+**Определение.** Azure Databricks Features for DLP — средства защиты от утечки
+на стороне платформы: `IP Access Lists` и `Unity Catalog`.
 
 **Назначение.** Сетевые меры Azure не ограничивают, кто открывает workspace и
 какие объекты он видит. Эти два средства закрывают именно это.
@@ -564,9 +573,9 @@ Private Link к storage) закрывают путь наружу; Unity Catalog
 
 <img width="1692" height="492" alt="image" src="https://github.com/user-attachments/assets/74faae11-a9f1-4b63-a131-e61acf975f91" />
 
-**Определение.** Три принципа, на которых строится модель доступа:
-`Authentication vs. Authorization`, `Principle of Least Privilege`,
-`Zero Trust Principle`.
+**Определение.** Additional DLP Topics — три принципа, на которых строится
+модель доступа: `Authentication vs. Authorization`,
+`Principle of Least Privilege`, `Zero Trust Principle`.
 
 **Назначение.** Задают, как выдаются права, независимо от конкретного сервиса:
 сначала подтверждение identity, затем минимально достаточные права.
@@ -586,8 +595,8 @@ Private Link к storage) закрывают путь наружу; Unity Catalog
 
 <img width="1699" height="834" alt="image" src="https://github.com/user-attachments/assets/ae4e29a0-7450-4b3f-9748-6a03a88d944e" />
 
-**Определение.** Private endpoint — сетевой интерфейс с частным адресом
-RFC 1918 из VNet заказчика, создающий приватное подключение к сервису через
+**Определение.** Private Endpoints — сетевые интерфейсы с частными адресами
+RFC 1918 из VNet заказчика, создающие приватное подключение к сервису через
 Azure Private Link.
 
 **Назначение.** Даёт публичному ресурсу локальную идентичность внутри сети:
@@ -609,8 +618,8 @@ Azure Private Link.
 
 <img width="1688" height="904" alt="image" src="https://github.com/user-attachments/assets/aa3bc8c9-01e2-472c-8e76-26487cf15ae4" />
 
-**Определение.** Service endpoint — настройка subnet, направляющая трафик к
-сервису Azure по оптимизированному маршруту через Azure backbone.
+**Определение.** Service Endpoints — настройка subnet, направляющая трафик к
+сервисам Azure по оптимизированному маршруту через Azure backbone.
 
 **Назначение.** Ограничивает доступ к storage account адресами конкретной
 subnet, не выделяя сервису частный IP в сети заказчика.
