@@ -22,9 +22,6 @@
 
 <img width="1328" height="749" alt="image" src="https://github.com/user-attachments/assets/e4110356-7d71-4924-a646-7f588f1e791c" />
 
-**Определение.** Azure Hierarchical Structure — пятиуровневая иерархия ресурсов
-Azure: Account → Tenant → Subscription → Resource Group → Resources.
-
 **Назначение.** Определяет, кто платит, где живут identity и на каком уровне
 применяются права и квоты. Workspace Azure Databricks создаётся внутри
 конкретной пары Subscription и Resource Group.
@@ -77,18 +74,11 @@ control plane в подписке Azure Databricks и data plane в подпис
 
 <img width="1698" height="957" alt="image" src="https://github.com/user-attachments/assets/823a7ae8-5794-4aea-a11c-60ca622b778e" />
 
-**Определение.** Lakehouse Reference Architecture — референсная схема платформы
-данных на Azure: пять стадий от источников до потребителей.
-
 **Назначение.** Задаёт, какой сервис Azure отвечает за каждую стадию, чтобы
 compute, storage и подача данных не смешивались в одном компоненте.
 
 **Как работает.**
 
-```mermaid
-flowchart LR
-  A[Data sources] --> B[Ingest] --> C[Store] --> D[Process] --> E[Serve] --> F[Apps / Power BI]
-```
 
 | Stage | Purpose | Services |
 | --- | --- | --- |
@@ -139,10 +129,6 @@ flowchart LR
 
 <img width="1696" height="554" alt="image" src="https://github.com/user-attachments/assets/195f978f-d8f3-49c6-9b04-a73f10466bee" />
 
-**Определение.** Cost Saving Features — четыре механизма снижения стоимости
-Azure Databricks: `Cluster Auto-shutdown`, `Elastic cluster sizes`,
-`Pre-purchase plan`, `Standard vs. Premium tier`.
-
 **Назначение.** Счёт складывается из DBU (Databricks Unit) и инфраструктуры
 Azure. Механизмы уменьшают либо время работы compute, либо ставку за DBU.
 
@@ -168,9 +154,6 @@ Azure. Механизмы уменьшают либо время работы co
 
 <img width="1679" height="790" alt="image" src="https://github.com/user-attachments/assets/6f27d08a-1ec5-4ec5-a8e5-9ee3aadf34c3" />
 
-**Определение.** Workspace Planning Questions — набор вопросов, на которые
-отвечают до создания workspace.
-
 **Назначение.** Сетевой режим, публичные IP и подключение к on-premises
 задаются при развёртывании, поэтому ошибка на этом шаге исправляется
 пересозданием workspace, а не изменением настройки.
@@ -191,11 +174,8 @@ Azure. Механизмы уменьшают либо время работы co
 
 <img width="1686" height="652" alt="image" src="https://github.com/user-attachments/assets/9276c8c2-f757-44c0-ae5c-60bb75ad5571" />
 
-**Определение.** Requirements to Get Started — ресурсы и параметры, которые
-готовят до развёртывания workspace.
-
-**Назначение.** Развёртывание запрашивает их сразу: отсутствие VNet или storage
-account останавливает создание workspace.
+**Назначение.** Развёртывание запрашивает всё перечисленное сразу: отсутствие
+VNet или storage account останавливает создание workspace.
 
 **Как работает.**
 
@@ -378,9 +358,6 @@ metastore своего региона.
 
 <img width="1682" height="891" alt="image" src="https://github.com/user-attachments/assets/a6255e6c-de3c-45a2-ac74-2a52177e5163" />
 
-**Определение.** Additional Networking Topics and Concepts — шесть базовых
-понятий сети Azure, на которых строится сетевая конфигурация workspace.
-
 **Назначение.** Задаёт минимальный словарь сети: адресное пространство, размер
 сети, связность, маршрутизация и два способа приватного доступа к сервисам.
 
@@ -528,11 +505,9 @@ Private Link к storage) закрывают путь наружу; Unity Catalog
 
 <img width="1685" height="537" alt="image" src="https://github.com/user-attachments/assets/8c6ac81f-8e44-44c2-afd0-c2f0aa7aba32" />
 
-**Определение.** Azure Features for DLP (Data Loss Prevention) — средства Azure,
-применяемые для защиты от утечки данных в развёртывании Azure Databricks.
-
-**Назначение.** Ограничивают сетевые пути, по которым данные могут покинуть
-периметр, и дают наблюдаемость исходящего трафика.
+**Назначение.** Средства Azure для DLP (Data Loss Prevention) ограничивают
+сетевые пути, по которым данные могут покинуть периметр, и дают наблюдаемость
+исходящего трафика.
 
 **Как работает.**
 
@@ -550,11 +525,8 @@ Private Link к storage) закрывают путь наружу; Unity Catalog
 
 <img width="1679" height="882" alt="image" src="https://github.com/user-attachments/assets/ae793d07-3ae7-4937-acbf-93734c6ef541" />
 
-**Определение.** Azure Databricks Features for DLP — средства защиты от утечки
-на стороне платформы: `IP Access Lists` и `Unity Catalog`.
-
 **Назначение.** Сетевые меры Azure не ограничивают, кто открывает workspace и
-какие объекты он видит. Эти два средства закрывают именно это.
+какие объекты он видит. `IP Access Lists` и `Unity Catalog` закрывают именно это.
 
 **Как работает.**
 
@@ -573,12 +545,8 @@ Private Link к storage) закрывают путь наружу; Unity Catalog
 
 <img width="1692" height="492" alt="image" src="https://github.com/user-attachments/assets/74faae11-a9f1-4b63-a131-e61acf975f91" />
 
-**Определение.** Additional DLP Topics — три принципа, на которых строится
-модель доступа: `Authentication vs. Authorization`,
-`Principle of Least Privilege`, `Zero Trust Principle`.
-
-**Назначение.** Задают, как выдаются права, независимо от конкретного сервиса:
-сначала подтверждение identity, затем минимально достаточные права.
+**Назначение.** Принципы задают, как выдаются права, независимо от конкретного
+сервиса: сначала подтверждение identity, затем минимально достаточные права.
 
 **Как работает.**
 
