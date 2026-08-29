@@ -108,5 +108,13 @@ VNet задаёт сетевой периметр, в котором выпол�
 Без VNet injection кластеры размещаются в сети Databricks. Организация слабо управляет маршрутизацией, политиками доступа и подключением к on-premises. С VNet injection узлы classic compute работают в виртуальной сети подписки заказчика. Это позволяет применять собственные NSG, firewall, Private Endpoint и соединение с корпоративной сетью.
 
 <img width="1701" height="834" alt="image" src="https://github.com/user-attachments/assets/f8e6a945-0f29-4675-9988-87a48faf0508" />
-<img width="1701" height="834" alt="image" src="https://github.com/user-attachments/assets/0aa02c2a-c11c-4cea-ac11-906943d3315c" />
+<img width="1690" height="898" alt="image" src="https://github.com/user-attachments/assets/de0fc6fa-a5d8-480a-8fa5-858862855075" />
+<img width="1689" height="844" alt="image" src="https://github.com/user-attachments/assets/548abe37-af22-4db4-9434-de11c0bc33f8" />
+
+### Azure Active Directory
+<img width="1615" height="866" alt="image" src="https://github.com/user-attachments/assets/81026b6c-f69d-475d-812d-82a9b29dbf60" />
+<img width="1692" height="826" alt="image" src="https://github.com/user-attachments/assets/2e9fe40b-a145-4812-92e4-0decca54a580" />
+
+### Unity Catalog and Accoun Administration
+<img width="1675" height="861" alt="image" src="https://github.com/user-attachments/assets/4fc87c69-5d6e-4069-8ecf-b32f0bfce74e" />
 
