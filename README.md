@@ -1,6 +1,6 @@
 # Databricks-architect-certification
 ## AZURE 
-### Account structure
+## Account structure
 <img width="1328" height="749" alt="image" src="https://github.com/user-attachments/assets/e4110356-7d71-4924-a646-7f588f1e791c" />
 
 
@@ -12,7 +12,7 @@
 | Resource Group | папка: деплой / удаление пачкой |
 | Resources | VNet, ADLS, Key Vault, Databricks workspace |
               
-### Control plane and data plane
+## Control plane and data plane
 <img width="1054" height="595" alt="image" src="https://github.com/user-attachments/assets/f9fd603c-7270-4174-a1c6-7b2ede65201e" />
 
 Сontrol plane:
@@ -27,7 +27,7 @@ Data plane:
 - Data sources — DB, lake, files, blobs
 - Secure integrations — BI, keys, identity (RBAC)
 
-### Reference architecture
+## Reference architecture
 <img width="1698" height="957" alt="image" src="https://github.com/user-attachments/assets/823a7ae8-5794-4aea-a11c-60ca622b778e" />
 
 Поток: Data sources → Ingest → Store → Process → Serve → Apps / Power BI
@@ -90,17 +90,17 @@ Flow:
 5. **Serve** — копия/выдача наружу: Cosmos (низкая latency), Synapse + Power BI, Apps.
 Compute на всех стрелках внутри озера — Azure Databricks. Storage слоёв — ADLS.
 
-### Cost Management
+## Cost Management
 1. https://www.databricks.com/product/azure-pricing
 2. https://azure.microsoft.com/en-us/pricing/calculator/
 
 <img width="1696" height="554" alt="image" src="https://github.com/user-attachments/assets/195f978f-d8f3-49c6-9b04-a73f10466bee" />
 
-### Planning Azure Workspace
+## Planning Azure Workspace
 <img width="1679" height="790" alt="image" src="https://github.com/user-attachments/assets/6f27d08a-1ec5-4ec5-a8e5-9ee3aadf34c3" />
 <img width="1686" height="652" alt="image" src="https://github.com/user-attachments/assets/9276c8c2-f757-44c0-ae5c-60bb75ad5571" />
 
-### VNet
+## VNet
 <img width="1694" height="850" alt="image" src="https://github.com/user-attachments/assets/46d5ebea-f47e-4d44-b4e2-3f36a027a9d3" />
 
 VNet задаёт сетевой периметр, в котором выполняется обработка данных. Цель — чтобы compute и трафик к storage оставались в контуре организации: контролируемый доступ к корпоративным системам, ограничение исходящего трафика и выполнение требований security и compliance.
@@ -111,10 +111,31 @@ VNet задаёт сетевой периметр, в котором выпол�
 <img width="1690" height="898" alt="image" src="https://github.com/user-attachments/assets/de0fc6fa-a5d8-480a-8fa5-858862855075" />
 <img width="1689" height="844" alt="image" src="https://github.com/user-attachments/assets/548abe37-af22-4db4-9434-de11c0bc33f8" />
 
-### Azure Active Directory
+## Azure Active Directory
 <img width="1615" height="866" alt="image" src="https://github.com/user-attachments/assets/81026b6c-f69d-475d-812d-82a9b29dbf60" />
 <img width="1692" height="826" alt="image" src="https://github.com/user-attachments/assets/2e9fe40b-a145-4812-92e4-0decca54a580" />
 
-### Unity Catalog and Accoun Administration
-<img width="1675" height="861" alt="image" src="https://github.com/user-attachments/assets/4fc87c69-5d6e-4069-8ecf-b32f0bfce74e" />
+## Unity Catalog and Accoun Administration
+<img width="1688" height="737" alt="image" src="https://github.com/user-attachments/assets/5cc16b29-e9b3-4d7b-bb52-73a0a4afba5f" />
+
+## Databricks Network Administration
+
+### 1. Azure Software Defined Networks
+<img width="1663" height="592" alt="image" src="https://github.com/user-attachments/assets/1d590113-1f27-45df-8f78-774bfa99c52e" />
+<img width="1682" height="891" alt="image" src="https://github.com/user-attachments/assets/a6255e6c-de3c-45a2-ac74-2a52177e5163" />
+
+### 2.Subnets
+Адрес нужен, чтобы у каждой машины обработки была уникальная идентичность в периметре: control plane мог отдать ей job, а она могла открыть соединение к ADLS. Без уникального IP узлы нельзя различить — как процессы без имени в оркестрации.
+
+Кто что делает:
+
+Вы задаёте диапазон VNet и каждой subnet (например 10.10.0.0/16, внутри два куска). Это вместимость: сколько узлов одновременно влезет.
+Azure при старте кластера сам выдаёт свободный частный IP из subnet каждой сетевой карте VM. Вручную IP нодам обычно не раздают.
+Когда кластер гаснет, адреса возвращаются в пул.
+Мало адресов — в пик ETL не стартует ещё один job. 
+
+### 3.CIDR Ranges
+<img width="1688" height="611" alt="image" src="https://github.com/user-attachments/assets/cb91aea9-5f18-4960-a3ff-7756c55d0d02" />
+
+
 
