@@ -135,7 +135,47 @@ Azure при старте кластера сам выдаёт свободны�
 Мало адресов — в пик ETL не стартует ещё один job. 
 
 ### 3.CIDR Ranges
+CIDR (Classless Inter-Domain Routing) — нотация размера адресного пространства: 10.10.0.0/24. Слева начало диапазона, после / — сколько адресов в пуле. Меньше число после / — больше адресов.
+
+| Часть | Значение |
+| --- | --- |
+| `10.10.0.0` | начало диапазона |
+| `/24` | длина маски: сколько адресов в пуле |
 <img width="1688" height="611" alt="image" src="https://github.com/user-attachments/assets/cb91aea9-5f18-4960-a3ff-7756c55d0d02" />
+
+### 4. VNet Peering
+<img width="1679" height="832" alt="image" src="https://github.com/user-attachments/assets/9c44a901-af44-493a-b8ba-26454381f9ab" />
+Peering — договорённость, что две сети доверяют друг другу прямой обмен трафиком по согласованным правилам, без посредника вроде public internet.
+
+В Azure это VNet peering (Virtual Network peering): две VNet (Virtual Network) объявляют, что машины в одной видят частные IP другой. Кластер в сети Databricks может обратиться к ADLS (Azure Data Lake Storage) или к другой VNet так, как если бы они были соседними сегментами одной инфраструктуры.
+
+Без peering каждая VNet — изолированный контур: свои адреса, своего выхода наружу. С peering появляется частный мост между контурами (в одном region или, как global peering, между регионами).
+
+## UDRs (User Defined Routing) with Azure Databricks
+# UDR (User-Defined Routes)
+
+**UDR (User-Defined Routes)** — таблица маршрутов на subnet (подсеть) в VNet (Virtual Network): трафик к заданному префиксу направляется на указанный next hop (firewall, VPN-шлюз, NVA (Network Virtual Appliance)).
+
+Системные маршруты Azure уже связывают ресурсы внутри сети и с интернетом. UDR нужен, когда исходящий путь compute (кластеры Azure Databricks к ADLS (Azure Data Lake Storage), интернету, on-premises) должен идти **через выбранную точку контроля**, а не напрямую.
+
+| Цель | Роль UDR |
+| --- | --- |
+| Контроль исходящих данных | `0.0.0.0/0` → firewall |
+| Доступ к корпоративным системам | CIDR (Classless Inter-Domain Routing) on-premises → VPN / ExpressRoute |
+
+Если весь трафик отправить на firewall и не разрешить control plane и SCC (Secure Cluster Connectivity), кластер не стартует. NSG (Network Security Group) решает *можно ли*, UDR — *каким путём*.
+
+## Data Loss Prevention and Exfiltration 
+
+**Data exfiltration** — несанкционированный вынос данных из среды Azure Databricks: открытый исходящий путь, слишком широкий доступ к storage, скомпрометированные учётные данные, выгрузка query results или запись во внешний контур, который политика не разрешает.
+**Решение.** Регулируемые данные: сеть (VNet injection, SCC (Secure Cluster Connectivity), egress через firewall, Private Link к storage) + Unity Catalog. IP access lists — дополнительно к тому, *откуда* открывают UI.
+<img width="1685" height="537" alt="image" src="https://github.com/user-attachments/assets/8c6ac81f-8e44-44c2-afd0-c2f0aa7aba32" />
+<img width="1679" height="882" alt="image" src="https://github.com/user-attachments/assets/ae793d07-3ae7-4937-acbf-93734c6ef541" />
+<img width="1692" height="492" alt="image" src="https://github.com/user-attachments/assets/74faae11-a9f1-4b63-a131-e61acf975f91" />
+
+## Azure Databrikcs Endpoints 
+<img width="1699" height="834" alt="image" src="https://github.com/user-attachments/assets/ae4e29a0-7450-4b3f-9748-6a03a88d944e" />
+<img width="1688" height="904" alt="image" src="https://github.com/user-attachments/assets/aa3bc8c9-01e2-472c-8e76-26487cf15ae4" />
 
 
 
