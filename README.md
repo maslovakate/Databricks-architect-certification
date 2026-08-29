@@ -106,3 +106,7 @@ Compute на всех стрелках внутри озера — Azure Databri
 VNet задаёт сетевой периметр, в котором выполняется обработка данных. Цель — чтобы compute и трафик к storage оставались в контуре организации: контролируемый доступ к корпоративным системам, ограничение исходящего трафика и выполнение требований security и compliance.
 
 Без VNet injection кластеры размещаются в сети Databricks. Организация слабо управляет маршрутизацией, политиками доступа и подключением к on-premises. С VNet injection узлы classic compute работают в виртуальной сети подписки заказчика. Это позволяет применять собственные NSG, firewall, Private Endpoint и соединение с корпоративной сетью.
+
+<img width="1701" height="834" alt="image" src="https://github.com/user-attachments/assets/f8e6a945-0f29-4675-9988-87a48faf0508" />
+<img width="1701" height="834" alt="image" src="https://github.com/user-attachments/assets/0aa02c2a-c11c-4cea-ac11-906943d3315c" />
+
