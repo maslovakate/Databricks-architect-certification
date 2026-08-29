@@ -100,3 +100,9 @@ Compute на всех стрелках внутри озера — Azure Databri
 <img width="1679" height="790" alt="image" src="https://github.com/user-attachments/assets/6f27d08a-1ec5-4ec5-a8e5-9ee3aadf34c3" />
 <img width="1686" height="652" alt="image" src="https://github.com/user-attachments/assets/9276c8c2-f757-44c0-ae5c-60bb75ad5571" />
 
+### VNet
+<img width="1694" height="850" alt="image" src="https://github.com/user-attachments/assets/46d5ebea-f47e-4d44-b4e2-3f36a027a9d3" />
+
+VNet задаёт сетевой периметр, в котором выполняется обработка данных. Цель — чтобы compute и трафик к storage оставались в контуре организации: контролируемый доступ к корпоративным системам, ограничение исходящего трафика и выполнение требований security и compliance.
+
+Без VNet injection кластеры размещаются в сети Databricks. Организация слабо управляет маршрутизацией, политиками доступа и подключением к on-premises. С VNet injection узлы classic compute работают в виртуальной сети подписки заказчика. Это позволяет применять собственные NSG, firewall, Private Endpoint и соединение с корпоративной сетью.
